@@ -35,6 +35,7 @@ public class ContactsPage extends PageBase{
     }
 
     public static String getContactWord(String lang) {
+        logger.info("Language specified: " + lang);
         String contactWord = null;
         if (lang.equals("English")) {
             contactWord = "Contacts";
@@ -45,6 +46,7 @@ public class ContactsPage extends PageBase{
         } else if (lang.equals("Ukraine")) {
             contactWord = "Контакти";
         } else {
+            logger.error("Language not supported: "+ lang);
             throw new RuntimeException("Language not supported: "+ lang);
         }
         return contactWord;
