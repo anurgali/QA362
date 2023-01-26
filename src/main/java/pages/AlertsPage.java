@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Collection;
 
 
 public class AlertsPage extends PageBase{
@@ -23,7 +22,7 @@ public class AlertsPage extends PageBase{
 
     public AlertsPage clickOnSimpleAlertButton(){
         click(simpleAlertButton);
-        Alert alert = driver.switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         //sleep();
         alert.accept();//OK
         return this;
@@ -34,7 +33,7 @@ public class AlertsPage extends PageBase{
 
     public AlertsPage clickOnTimerAlertButton() {
         click(timerAlertButton);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
         Alert myAlert= wait.until(ExpectedConditions.alertIsPresent());
         String alertMsg=myAlert.getText();
         System.out.println("alert="+alertMsg);
@@ -51,9 +50,9 @@ public class AlertsPage extends PageBase{
             return this;
         }
         if (text.equals("Отмена")) {
-            driver.switchTo().alert().dismiss();
+            getDriver().switchTo().alert().dismiss();
         } else if (text.equals("OK")) {
-            driver.switchTo().alert().accept();
+            getDriver().switchTo().alert().accept();
         }
         return this;
     }
@@ -69,10 +68,10 @@ public class AlertsPage extends PageBase{
     public AlertsPage clickMessageAlertButton(String msg) {
         click(promtButton);
         if (msg != null) {
-            driver.switchTo().alert().sendKeys(msg);
+            getDriver().switchTo().alert().sendKeys(msg);
         }
-        System.out.println(driver.switchTo().alert().getText());
-        driver.switchTo().alert().accept();
+        System.out.println(getDriver().switchTo().alert().getText());
+        getDriver().switchTo().alert().accept();
         return this;
     }
 

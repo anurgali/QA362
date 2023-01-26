@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 
 public abstract class PageBase {
 
-    WebDriver driver;
+    private WebDriver driver;
     public static Logger logger = LoggerFactory.getLogger(PageBase.class);
 
     public PageBase(WebDriver driver) {
-        this.driver = driver;
+        this.setDriver(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -30,7 +30,7 @@ public abstract class PageBase {
     }
 
     public void clickWithJSExecutor(WebElement element, int x, int y){
-        JavascriptExecutor js= (JavascriptExecutor) driver;
+        JavascriptExecutor js= (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy("+x+","+y+")");
         click(element);
     }
@@ -49,5 +49,13 @@ public abstract class PageBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
     }
 }

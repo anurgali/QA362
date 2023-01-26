@@ -25,12 +25,12 @@ public class ContactsPage extends PageBase{
 
     public LoginPage logout(){
         click(logOutButton);
-        return new LoginPage(driver);
+        return new LoginPage(getDriver());
     }
 
     public WebElement getContacts(String lang) {
         String contactWord = getContactWord(lang);
-        contacts = driver.findElement(By.xpath("//a[contains(text(),'"+contactWord+"')]"));
+        contacts = getDriver().findElement(By.xpath("//a[contains(text(),'"+contactWord+"')]"));
         return contacts;
     }
 
@@ -54,7 +54,7 @@ public class ContactsPage extends PageBase{
 
     public ContactsPage selectLanguage(String lang){
         click(selectLang);
-        WebElement language = driver.findElement(By.xpath("//option[contains(text(),'"+lang+"')]"));
+        WebElement language = getDriver().findElement(By.xpath("//option[contains(text(),'"+lang+"')]"));
         click(language);
         return this;
     }

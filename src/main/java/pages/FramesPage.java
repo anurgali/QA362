@@ -17,21 +17,26 @@ public class FramesPage extends PageBase{
     @FindBy(tagName = "iframe")
     List<WebElement> frames;
 
-    @FindBy(css = "body:nth-child(2) > iframe:nth-child(2)")
-    WebElement frame1;////iframe[@id='frame1']
+    @FindBy(id = "frame1")
+    WebElement frame1;
 
     private String text;
 
     public FramesPage returnListOfFrames(){
-
-        //System.out.println(frames.size());
-        text = driver.switchTo().frame(frame1).getText(); // switch by index
-
-
-//        driver.switchTo().frame(frame1); // switch by id
-
-//        driver.switchTo().parentFrame(); // nested frames
+        System.out.println(frames.size());
+        System.out.println(getDriver().switchTo().frame(frame1).findElement(By.id("sampleHeading")).getText());
         return this;
+    }
+
+    public void switchToFrameByIndex(int index) {
+        //        text = driver.switchTo().frame(frame1).getText(); // switch by index
+        getDriver().switchTo().frame(index);
+
+    }
+
+    public void switchToFrameById(WebElement frame) {
+        getDriver().switchTo().frame(frame); // switch by id
+        getDriver().switchTo().defaultContent();
     }
 
     public String getText() {

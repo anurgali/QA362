@@ -41,7 +41,7 @@ public class BookStorePage extends PageBase{
 
     public BookStorePage addToCollection() {
         clickWithJSExecutor(addToCollectionButton, 0, 100);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(1));
         Alert alert= wait.until(ExpectedConditions.alertIsPresent());
         //Alert alert = driver.switchTo().alert();
         bookAddedMsg = alert.getText();

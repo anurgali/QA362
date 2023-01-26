@@ -3,10 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class WindowsPage extends PageBase{
@@ -46,17 +43,16 @@ public class WindowsPage extends PageBase{
     }
 
     public WindowsPage clickButton(WebElement button) {
+        Set<String> handles = getDriver().getWindowHandles();
         click(button);
-        String originalWindow = driver.getWindowHandle();
-        for (String windowHandle : driver.getWindowHandles()) {
+        sleep();
+        String originalWindow = getDriver().getWindowHandle();
+        for (String windowHandle : getDriver().getWindowHandles()) {
             if(!originalWindow.contentEquals(windowHandle)) {
-                driver.switchTo().window(windowHandle);
+                getDriver().switchTo().window(windowHandle);
                 break;
             }
         }
-
-
-        //driver.switchTo().window(tabs.get(0));
         return this;
     }
 

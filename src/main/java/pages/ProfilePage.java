@@ -19,12 +19,12 @@ public class ProfilePage extends PageBase{
 
     public BookStorePage scrollDownAndGoToBookStore() {
         clickWithJSExecutor(bookstoreMenu, 0, 150);
-        return new BookStorePage(driver);
+        return new BookStorePage(getDriver());
     }
 
     public BookStorePage goToBookStore(){
         click(bookstoreMenu);
-        return new BookStorePage(driver);
+        return new BookStorePage(getDriver());
     }
 
     @FindBy(xpath = "//button[contains(text(),'Delete All Books')]")
@@ -32,7 +32,7 @@ public class ProfilePage extends PageBase{
 
     public ProfilePage deleteAllBooks() {
         clickWithJSExecutor(deleteBooks, 0, 100);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(1));
         Alert alert= wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
         return this;

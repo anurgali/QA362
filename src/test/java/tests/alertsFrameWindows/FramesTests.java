@@ -10,11 +10,11 @@ public class FramesTests extends TestBase {
 
     @BeforeSuite
     public void setUpInternal(){
-        super.setUrl("https://demoqa.com/nestedframes");
+        super.setUrl("https://demoqa.com/frames");
     }
 
     @Test
     public void simpleFrameTest() {
-        System.out.println(new FramesPage(getDriver()).returnListOfFrames().getText());
+       new FramesPage(getDriver()).returnListOfFrames();
     }
 }

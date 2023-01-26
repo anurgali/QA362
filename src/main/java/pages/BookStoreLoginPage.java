@@ -23,7 +23,7 @@ public class BookStoreLoginPage extends PageBase{
         type(userName, UserData.USER_NAME);
         type(pass, UserData.PASSWORD);
         click(loginButton);
-        return new ProfilePage(driver);
+        return new ProfilePage(getDriver());
     }
 
 }

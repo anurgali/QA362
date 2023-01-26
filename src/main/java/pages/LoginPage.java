@@ -24,7 +24,7 @@ public class LoginPage extends PageBase{
         type(userName, uName);
         type(password, pass);
         click(loginButton);
-        return new ContactsPage(driver);
+        return new ContactsPage(getDriver());
     }
 
     public LoginPage loginNegative(String uName, String pass) {
