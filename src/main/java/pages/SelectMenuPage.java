@@ -20,18 +20,16 @@ public class SelectMenuPage extends PageBase{
     public SelectMenuPage oldStyleMenu(String text){
         Select select = new Select(oldStyleMenu);
         select.selectByVisibleText(text);
-
+        sleep();
+        System.out.println(select.getFirstSelectedOption().getText());
+        sleep();
+        System.out.println("******");
         List<WebElement> options = select.getOptions();
         for (WebElement element :
                 options) {
             System.out.println(element.getText());
         }
-
         System.out.println("******");
-
-        System.out.println(select.getFirstSelectedOption().getText());
-
-
         return this;
     }
 
@@ -56,6 +54,7 @@ public class SelectMenuPage extends PageBase{
 
     public SelectMenuPage deselect(){
         click(deselect);
+        sleep();
         return this;
     }
 
@@ -66,9 +65,13 @@ public class SelectMenuPage extends PageBase{
     public SelectMenuPage multiSelectDropdown(String text1, String text2, String text3){
         inputSelect.sendKeys(text1);
         inputSelect.sendKeys(Keys.ENTER);
+        sleep();
         inputSelect.sendKeys(text2);
         inputSelect.sendKeys(Keys.ENTER);
+        sleep();
         inputSelect.sendKeys(text3);
+        inputSelect.sendKeys(Keys.ENTER);
+        sleep();
         click(space);
         return this;
     }
@@ -79,9 +82,10 @@ public class SelectMenuPage extends PageBase{
     public SelectMenuPage standardMultiSelect(){
         Select multi = new Select(cars);
         if (multi.isMultiple()){
-            multi.selectByIndex(1);
+            multi.selectByIndex(0);
             multi.selectByIndex(3);
         }
+        sleep();
         List<WebElement> list = multi.getAllSelectedOptions();
         for (WebElement car :
                 list) {

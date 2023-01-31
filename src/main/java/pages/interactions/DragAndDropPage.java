@@ -29,7 +29,7 @@ public class DragAndDropPage extends PageBase {
     public DragAndDropPage actionDragBy(){
         Actions actions=new Actions(getDriver());
         int xOffset = dragMe.getLocation().getX();
-        int yOffset =dropHere.getLocation().getY();
+        int yOffset = dragMe.getLocation().getY();
         System.out.println("x="+xOffset+" y="+yOffset);
         int xoffset1 = dropHere.getLocation().getX();
         int yoffset1 = dropHere.getLocation().getY();
@@ -37,6 +37,7 @@ public class DragAndDropPage extends PageBase {
 
         xoffset1 = (xoffset1 - xOffset)+20;
         yoffset1 = (yoffset1 - yOffset)+30;
+        System.out.println("x="+xoffset1+" y="+yoffset1);
         sleep();
         actions.dragAndDropBy(dragMe, xoffset1, yoffset1).perform();
 
@@ -44,9 +45,11 @@ public class DragAndDropPage extends PageBase {
         return this;
     }
 
+
     public DragAndDropPage actionDragByIndex(int x, int y){
         Actions actions=new Actions(getDriver());
         actions.dragAndDropBy(dragMe, x, y). perform();
+        sleep();
         return this;
     }
 }
