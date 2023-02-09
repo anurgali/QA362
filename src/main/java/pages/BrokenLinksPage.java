@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 
 public class BrokenLinksPage extends PageBase{
@@ -18,20 +17,19 @@ public class BrokenLinksPage extends PageBase{
     @FindBy(tagName = "a")
     List<WebElement> links;
 
-    public BrokenLinksPage checkAllLinks(){
+    public BrokenLinksPage printAllLinks(){
         System.out.println("total links = "+ links.size());
-        String url="";
-        Iterator<WebElement> iterator = links.iterator();
-        while (iterator.hasNext()) {
-            url = iterator.next().getText();
-            System.out.println(url);
+        for (WebElement link: links) {
+            System.out.println(link.getText());
+            System.out.println(link.getAttribute("href"));
+            System.out.println("=====================");
         }
         return this;
     }
 
     public BrokenLinksPage checkBrokenLinks() {
         for (int i = 0; i<links.size(); i++) {
-            WebElement element = links.get(0);
+            WebElement element = links.get(i);
             String url = element.getAttribute("href");
             verifyUrls(url);
         }
@@ -41,7 +39,7 @@ public class BrokenLinksPage extends PageBase{
     private void verifyUrls(String link) {
         try{
             URL url = new URL(link);
-            HttpURLConnection httpConn=(HttpURLConnection) url.openConnection();
+           HttpURLConnection httpConn=(HttpURLConnection) url.openConnection();
             httpConn.setConnectTimeout(5000);
             httpConn.connect();
             if (httpConn.getResponseCode() >= 400){
@@ -63,17 +61,12 @@ public class BrokenLinksPage extends PageBase{
             String imageUrl = image.getAttribute("src");
             System.out.println("Url: "+ imageUrl);
             verifyUrls(imageUrl);
-            try {
-                boolean imageDisplayed = (Boolean) ((JavascriptExecutor) getDriver())
-                        .executeScript("return (typeof arguments[0].naturalWidth != undefined &&" +
-                                "arguments[0].naturalWidth>0);", image);
-                if (imageDisplayed) {
-                    System.out.println("Image is OK");
-                } else {
-                    System.out.println("Image is broken");
-                }
-            } catch (Exception e) {
-                System.out.println(imageUrl + " is broken: "+ e.getMessage());
+            boolean imageDisplayed = (Boolean) ((JavascriptExecutor) getDriver())
+                    .executeScript("return (typeof arguments[0].naturalWidth != undefined && arguments[0].naturalWidth>0);", image);
+            if (imageDisplayed) {
+                System.out.println("Image is OK");
+            } else {
+                System.out.println("Image is broken");
             }
         }
         return this;

@@ -16,13 +16,18 @@ public class ToolTipsPage extends PageBase{
     @FindBy(css = ".tooltip-inner")
     WebElement toolTip;
 
+    private String toolTipText;
+
     public ToolTipsPage hoverToolTipButton(){
         Actions actions = new Actions(getDriver());
-
         actions.moveToElement(toolTipButton).perform();
-
         System.out.println(toolTip.getText());
+        toolTipText = toolTip.getText();
+        sleep();
         return this;
     }
 
+    public String getToolTipText() {
+        return toolTipText;
+    }
 }
