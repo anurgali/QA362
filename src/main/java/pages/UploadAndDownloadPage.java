@@ -61,25 +61,4 @@ public class UploadAndDownloadPage extends PageBase{
     public String getUploadFilePath() {
         return uploadFilePath.getText();
     }
-
-    public UploadAndDownloadPage performMouseEventUsingRobot() {
-        click(uploadFile);
-        sleep();
-        try {
-            Robot robot = new Robot();
-            Dimension i = getDriver().manage().window().getSize();
-            System.out.println("DIMENSION: "+ i.getWidth()+" "+ i.getHeight());
-            int x= i.getWidth()/4+500;
-            int y = i.getHeight()/10+250;
-            robot.mouseMove(x,y);
-            sleep();
-            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-            sleep();
-            robot.keyPress(KeyEvent.VK_ENTER);
-        } catch (AWTException e) {
-
-        }
-        return this;
-    }
 }
